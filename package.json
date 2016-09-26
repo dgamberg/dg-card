@@ -1,0 +1,18 @@
+{
+  "name": "dungeongame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js"
+  },
+  "author": "Dave Gamberg",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "express": "^4.14.0",
+    "path": "^0.12.7"
+  }
+}

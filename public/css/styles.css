@@ -1,0 +1,180 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color: #f3f3f3;
+}
+main{
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-container{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #ccc;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px #666;
+}
+.monster-card-container{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #ccc;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px #666;
+}
+
+.card-stat-label{
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+.monster-card-stat-label{
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+.card-image{
+     width: 300px;
+     height: 300px;
+     border-radius: 10px;
+     margin-top: 25px;
+ }
+.monster-card-image{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+.get-monster-button{
+    margin: 50px auto 15px auto;
+    background-color: #000;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    width: 100px;
+}
+
+.card-health-value {
+    font-size: 20px;
+    width: 21px;
+    float: left;
+    font-weight: bold;
+}
+.card-damage-value {
+    font-size: 20px;
+    width: 24px;
+    float: left;
+    font-weight: bold;
+}
+.card-name-value {
+    font-size: 30px;
+    font-weight: bold;
+}
+.card-name-container {
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.outer-card-container {
+    float: left;
+    margin-right: 25px;
+}
+.monster-card-health-value {
+    font-size: 20px;
+    width: 21px;
+    float: left;
+    font-weight: bold;
+}
+.monster-card-damage-value {
+    font-size: 20px;
+    width: 24px;
+    float: left;
+    font-weight: bold;
+}
+.monster-card-name-value {
+    font-size: 30px;
+    font-weight: bold;
+}
+.monster-card-name-container {
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+.message-body{
+    font-size: 16px;
+    color: #cc1120;
+}
+.messages-container {
+    clear: both;
+    width: 150px;
+}
+.dead {
+    color: #cc1120;
+    font-weight: bold;
+    font-size: 16px;
+}
+.damaged{
+    color: green;
+    font-size: 16px;
+}
+.missed{
+    color: #cc1120;
+    font-weight: bold;
+    font-size: 16px;
+}
+.health{
+    color: #1f31c0;
+    font-size: 16px;
+    font-style: italic;
+}
+.actions-container {
+    position: absolute;
+    right: 0;
+    padding-right: 50px;
+    text-align: left;
+}
+.attack-button-container {
+    height: 50px;
+    width: 150px;
+    float: left;
+}
+.reload-button-container{
+    display: none;
+    height: 50px;
+    width: 150px;
+    float: left;
+}
+.attack-button{
+    background-color: #cc1120;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+.continue-button{
+    background-color: #146224;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.attack-button-hide{
+    display: none;
+}
+.continue-button-hide{
+    display: none;
+}
+
+
