@@ -42,21 +42,23 @@ var dungeonGame = {
         });
         
         $('.continue-button').on('click', function(){
-            $('.monster-card-output').html("");
-            $('#messages-container').html("");
-            $('.attack-button-container').css('display', 'block');
-            $('.continue-button-container').css('display', 'none');
-
-            dungeonGame.getRandomMonster();
-            // first monster
-            dungeonGame.renderMonsterCard();
-
+           dungeonGame.finishRound();
         });
     },
 
     // ------------------------------------
     // U T I L I T Y    F U N C T I O N S
     // ------------------------------------
+    finishRound: function(){
+        $('.monster-card-output').html("");
+        $('#messages-container').html("");
+        $('.attack-button-container').css('display', 'block');
+        $('.continue-button-container').css('display', 'none');
+
+        dungeonGame.getRandomMonster();
+        // first monster
+        dungeonGame.renderMonsterCard();
+    },
     generateHealth: function (level) {
         var min = 20;
         var max = level * 20;
