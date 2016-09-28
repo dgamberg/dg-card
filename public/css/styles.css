@@ -121,8 +121,8 @@ main{
 .messages-container {
     clear: both;
     width: 150px;
-    height: 300px;
-    overflow: hidden;
+    height: 600px;
+    overflow: scroll;
 }
 
 .dead {
