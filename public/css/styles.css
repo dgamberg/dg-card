@@ -115,10 +115,16 @@ main{
     font-size: 16px;
     color: #cc1120;
 }
+.inner-message-container {
+    clear: both;
+}
 .messages-container {
     clear: both;
     width: 150px;
+    height: 300px;
+    overflow: hidden;
 }
+
 .dead {
     color: #cc1120;
     font-weight: bold;
@@ -155,7 +161,14 @@ main{
     width: 150px;
     float: left;
 }
-.attack-button{
+.character-attack-button{
+    background-color: #cc1120;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+.monster-attack-button{
     background-color: #cc1120;
     color: #fff;
     padding: 10px 20px;

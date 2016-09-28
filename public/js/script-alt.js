@@ -1,4 +1,4 @@
-var characters = [
+var character = [
     {
         "name": "Warrior",
         "health": 100,
@@ -29,16 +29,15 @@ function gameInit(){
     monstersFought.push(monster);
     this.renderMonsterCard(monster);
 
-    $('.attack-button').on('click', function(){
-        attackMonster(this);
+
+    $('.attack-button').on('click', function(monster, hero1){
+        this.attackMonster();
     });
 
     $('.reload-button').on('click', function(){
         $('.monster-card-output').html("");
         $('.messages-container').html("");
 
-        // var anotherMonster = getRandomMonster();
-        // var anotherMonsterCard = dungeonGame.renderMonsterCard(anotherMonster);
 
         $('.attack-button-container').css('display', 'block');
         $('.reload-button-container').css('display', 'none');
@@ -54,7 +53,7 @@ function getRandomMonster(){
     return monster;
 }
 function loadHero(number){
-    return characters[number];
+    return character[number];
 }
 
 function renderHeroCard(cardObject){
@@ -79,14 +78,15 @@ function renderMonsterCard(cardObject){
     $el.append(output);
 }
 
-function addMessage(message){
+function addMessage(message) {
     $('.messages-container').append("<div class='inner-message-container'></div>");
     var $el = $('.messages-container').children().last();
     $el.append(message);
-};
+}
+
 function attackMonster(monster, character){
-    var heroSkill = character.skillLevel;
-    var monsterSkill = monster.skillLevel;
+    var heroSkill = this.character.skillLevel;
+    var monsterSkill = this.monster.skillLevel;
     var heroMultiplier = 10 * heroSkill;
     var range = 100;
     var randNum = Math.floor((Math.random() * range) +1);
