@@ -30,8 +30,8 @@ function gameInit(){
     this.renderMonsterCard(monster);
 
 
-    $('.attack-button').on('click', function(monster, hero1){
-        this.attackMonster();
+    $('.attack-button').on('click', function(){
+        dungeonGame.attackMonster();
     });
 
     $('.reload-button').on('click', function(){

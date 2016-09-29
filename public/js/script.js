@@ -19,7 +19,7 @@ var globalVars = {
         { "name": "Displacer Beast",  "damage": 4, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 7  }
     ],
     "currentMonster": {},
-    "monstersKilled": []
+    "monstersKilled": [],
 };
 
 var dungeonGame = {
@@ -36,9 +36,12 @@ var dungeonGame = {
         $('.character-attack-button-container').on('click', '.character-attack-button', function(){
             $('#messages-container').html("");
             dungeonGame.characterAttack();
+
         });
         $('.monster-card-output').on('click', '.monster-attack-button', function(){
+            $('#messages-container').html("");
             dungeonGame.monsterAttack();
+
         });
         $('.continue-button').on('click', function(){
            dungeonGame.finishRound();
@@ -49,10 +52,12 @@ var dungeonGame = {
     // U T I L I T Y    F U N C T I O N S
     // ------------------------------------
     addMessage: function(message){
-        $('#messages-container').append("<div class='inner-message-container'></div>");
-        var $el = $('#messages-container').children().append();
+        var $el = $('#messages-container');
+        $el.append("<div class='inner-message-container'></div>");
+        $el.children().last();
         $el.append(message);
     },
+
     finishRound: function(){
         $('.monster-card-output').html("");
         $('#messages-container').html("");
@@ -111,6 +116,7 @@ var dungeonGame = {
 
         var monster = this.getMonsterById(randMonster);
         monster.id = this.generateMonsterId();
+        monster.isAlive = true;
 
         monster.health = this.generateHealth(monster.skillLevel);
         this.setCurrentMonster(monster);
@@ -126,7 +132,6 @@ var dungeonGame = {
         output += "<div class='monster-card-stat-container'><div class='monster-card-stat-label'>Health:</div><div class='monster-card-health-value'>" + card.health + "</div></div>";
         output += "<div class='monster-card-stat-container'><div class='monster-card-stat-label'>Damage:</div><div class='monster-card-damage-value'>" + card.damage + "</div></div>";
         output += "<div class='monster-card-image-container'><img class='monster-card-image' src='img/" + card.imageUrl + "'/></div></div>";
-        output += "<div class='monster-attack-button-container'><button class='monster-attack-button'><-Attack Character</button></div>";
         var $monsterCard = $('.monster-card-output');
         $monsterCard.append("<div class='outer-card-container'></div>");
         var $el = $monsterCard.children().last();
@@ -158,8 +163,24 @@ var dungeonGame = {
     // ------------------------------------
     // A T T A C K   &   D A M A G E    F U N C T I O N S
     // ------------------------------------
+    attackMessage: function(){
+        var monster = dungeonGame.getCurrentMonster();
+        if(monster.isAlive == true){
+            var $el = $('#messages-container');
+            $el.append("<div class='inner-message-container'></div>");
+            $el.children().last();
 
+            $el.append("<div class='bold-blue'>" + monster.name + "</div><div class='bold-blue'>Is Attacking.......</div>");
+
+
+                setTimeout(function(){
+                    $('#messages-container').html("");
+                    dungeonGame.monsterAttack();
+                }, 3000);
+        }
+    },
     monsterAttack: function(){
+
         var monster = this.getCurrentMonster();
 
         var monsterMultiplier = 10 * monster.skillLevel;
@@ -168,11 +189,13 @@ var dungeonGame = {
         // console.log("Random Number" , randNum );
         // console.log("hero Skill" , heroMultiplier);
         if (randNum <= monsterMultiplier){
-            dungeonGame.addMessage("<div class='missed'>" + monster.name + ": HIT! </div>");
+            dungeonGame.addMessage("<div class='bold-red'>" + monster.name + ": HIT! </div>");
             dungeonGame.damageCharacter();
+            dungeonGame.addMessage("<div class='bold-blue'>....Your Turn</div>");
         }
         else {
-            dungeonGame.addMessage("<div class='damaged'>" + monster.name + ": MISS! </div>");
+            dungeonGame.addMessage("<div class='bold-green'>" + monster.name + ": MISS! </div>");
+            dungeonGame.addMessage("<div class='bold-blue'>....Your Turn - Click Attack</div>");
         }
     },
 
@@ -185,46 +208,56 @@ var dungeonGame = {
         // console.log("Random Number" , randNum );
         // console.log("hero Skill" , heroMultiplier);
         if (randNum <= heroMultiplier){
-            dungeonGame.addMessage("<div class='damaged'>You Hit The "+ monster.name +" </div>");
+            dungeonGame.addMessage("<div class='bold-green'>You Hit The "+ monster.name +"!</div>");
             dungeonGame.damageMonster();
+            setTimeout(function(){
+                $('#messages-container').html("");
+                dungeonGame.attackMessage();
+            }, 3000);
         }
         else {
-            dungeonGame.addMessage("<div class='missed'>You Missed</div>");
+            dungeonGame.addMessage("<div class='bold-red'>...You Missed!</div>");
+            setTimeout(function(){
+                $('#messages-container').html("");
+                dungeonGame.attackMessage();
+            }, 3000);
         }
+
     },
 
     damageCharacter: function(){
-        var monster = this.getCurrentMonster();
+        var monster = dungeonGame.getCurrentMonster();
         var damage = monster.damage;
-        var health = this.getCharacterHealth();
+        var health = dungeonGame.getCharacterHealth();
         var newHealth = health - damage;
 
-        this.addMessage("<div class='missed'>" + monster.name + ": Did" + damage + " damage! </div>");
-        this.addMessage("<div class='health'>You: " + newHealth + "Health</div>");
+        dungeonGame.addMessage("<div class='bold-red'>" + monster.name + ": Did " + damage + " damage! </div>");
+        dungeonGame.addMessage("<div class='bold-blue'>You: " + newHealth + " Health</div>");
 
         if (newHealth <= 0){
             if(newHealth < 0){
-                this.updateCharacterHealth(0);
+                dungeonGame.updateCharacterHealth(0);
             }
             dungeonGame.characterIsDead();
         }
         else{
-            this.updateCharacterHealth(newHealth);
+            dungeonGame.updateCharacterHealth(newHealth);
         }
     },
 
     damageMonster: function(){
         var damage = globalVars.character.damage;
-        var health = this.getMonsterHealth();
+        var health = dungeonGame.getMonsterHealth();
         var newHealth = health - damage;
-        this.setMonsterHealth(newHealth);
+        dungeonGame.setMonsterHealth(newHealth);
 
-        dungeonGame.addMessage("<div class='damaged'>Warrior: " + damage + " damage! </div>");
-        dungeonGame.addMessage("<div class='health'>" + newHealth + " health remaining</div>");
+        dungeonGame.addMessage("<div class='bold-green'>Warrior: " + damage + " damage! </div>");
+        dungeonGame.addMessage("<div class='bold-blue'>" + newHealth + " health remaining</div>");
+
         dungeonGame.updateCurrentMonsterHealth(newHealth);
         if (newHealth <= 0){
             if(newHealth < 0){
-                this.setMonsterHealth(0);
+                dungeonGame.setMonsterHealth(0);
             }
             dungeonGame.monsterIsDead();
         }
@@ -238,7 +271,9 @@ var dungeonGame = {
     },
 
     monsterIsDead: function(){
+
         var monster = this.getCurrentMonster();
+        monster.isAlive = false;
         $('.monster-card-health-value').html("<span class='dead'>DEAD</span>");
         var message = "";
         message += "<div class='dead'>The " + monster.name + " is dead</div>";
@@ -247,6 +282,7 @@ var dungeonGame = {
         $('.continue-button-container').css('display', 'block');
         globalVars.monstersKilled.unshift(monster);
     }
+
 };
 $(document).ready(function(){
    dungeonGame.gameInit();
