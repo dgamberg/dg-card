@@ -1,12 +1,43 @@
 var globalVars = {
-    "character": {
-        "name": "Warrior",
-        "health": 100,
-        "damage": 20,
-        "skillLevel": 5,
-        "armour": 10,
-        "imageUrl": "hero2.jpg"
-    },
+    "character": [
+        {
+            "name": "Blastoise",
+            "health": 190,
+            "damage": 30,
+            "skillLevel": 5,
+            "armour": 10,
+            "imageUrl": "pokemon/blastoise.jpg"
+        },
+        {
+            "name": "Charzard",
+            "health": 190,
+            "damage": 30,
+            "skillLevel": 5,
+            "armour": 10,
+            "imageUrl": "pokemon/charzard.jpg"
+        },
+        {
+            "name": "Optimus Prime",
+            "health": 530,
+            "damage": 90,
+            "skillLevel": 5,
+            "armour": 10,
+            "imageUrl": "transformers/optimus-prime.jpg"
+        }
+
+    ],
+    "transformerList": [
+        { "name": "Orc",  "damage": 10,"imageUrl": "orc.png", "skillLevel": 3, "armour": 3 },
+        { "name": "Goblin", "damage": 12, "imageUrl": "goblin.jpg", "skillLevel": 4, "armour": 5  },
+        { "name": "Troll",  "damage": 16, "imageUrl": "troll.jpg", "skillLevel": 5, "armour": 3  },
+        { "name": "Unicron",  "damage": 20, "imageUrl": "blood-angel.jpg", "skillLevel": 9, "armour": 5  },
+        { "name": "Tarantulas",  "damage": 12, "imageUrl": "bugbear.jpg", "skillLevel": 4, "armour": 3  },
+        { "name": "Star Scream",  "damage": 4, "imageUrl": "carrion-crawler.jpg", "skillLevel": 3, "armour": 3  },
+        { "name": "Megatron",  "damage": 4, "imageUrl": "death-dog.jpg", "skillLevel": 3, "armour": 4  },
+        { "name": "Devastator",  "damage": 7, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 6  },
+        { "name": "Barricade",  "damage": 4, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 7  }
+    ],
+
     "monsterList": [
         { "name": "Orc",  "damage": 10,"imageUrl": "orc.png", "skillLevel": 3, "armour": 3 },
         { "name": "Goblin", "damage": 12, "imageUrl": "goblin.jpg", "skillLevel": 4, "armour": 5  },
@@ -27,7 +58,7 @@ var dungeonGame = {
         console.log("Game Initialized");
 
         //Load Hero
-        dungeonGame.renderCharacterCard(globalVars.character);
+        dungeonGame.renderCharacterCard(globalVars.character[2]);
 
         // Get First Monster
         dungeonGame.getRandomMonster();
@@ -143,8 +174,8 @@ var dungeonGame = {
         output += "<div class='card-container'><div class='card-name-container'><div class='card-name-value'>" + cardObject.name + "</div></div>";
         output += "<div class='card-stat-container'><div class='card-stat-label'>Health:</div><div class='card-health-value'>" + cardObject.health + "</div></div>";
         output += "<div class='card-stat-container'><div class='card-stat-label'>Damage:</div><div class='card-damage-value'>" + cardObject.damage + "</div></div>";
-        output += "<div class='card-image-container'><img class='card-image' src='img/" + cardObject.imageUrl + "'/></div></div>";
-        output += "<div class='character-attack-button-container'> <button class='character-attack-button'>Attack Monster-></button></div>"
+        output += "<div class='card-image-container'><img class='card-image' src='img/" + cardObject.imageUrl + "'/></div>";
+        output += "<div class='character-attack-button-container'> <button class='character-attack-button'>ATTACK</button></div></div>"
         $('.hero-card-output').append("<div class='outer-card-container'></div>");
         var $el = $('.hero-card-output').children().last();
         $el.append(output);
@@ -169,20 +200,15 @@ var dungeonGame = {
             var $el = $('#messages-container');
             $el.append("<div class='inner-message-container'></div>");
             $el.children().last();
-
-            $el.append("<div class='bold-blue'>" + monster.name + "</div><div class='bold-blue'>Is Attacking.......</div>");
-
-
-                setTimeout(function(){
-                    $('#messages-container').html("");
-                    dungeonGame.monsterAttack();
-                }, 3000);
+            $el.append("<div class='bold-blue'>" + monster.name + "</div><div class='bold-blue'>Is Attacking You</div>");
+            setTimeout(function(){
+                $('#messages-container').html("");
+                dungeonGame.monsterAttack();
+            }, 3000);
         }
     },
     monsterAttack: function(){
-
         var monster = this.getCurrentMonster();
-
         var monsterMultiplier = 10 * monster.skillLevel;
         var range = 100;
         var randNum = Math.floor((Math.random() * range) +1);
@@ -191,11 +217,11 @@ var dungeonGame = {
         if (randNum <= monsterMultiplier){
             dungeonGame.addMessage("<div class='bold-red'>" + monster.name + ": HIT! </div>");
             dungeonGame.damageCharacter();
-            dungeonGame.addMessage("<div class='bold-blue'>....Your Turn</div>");
+            dungeonGame.addMessage("<div class='bold-blue'>Your Turn</div>");
         }
         else {
             dungeonGame.addMessage("<div class='bold-green'>" + monster.name + ": MISS! </div>");
-            dungeonGame.addMessage("<div class='bold-blue'>....Your Turn - Click Attack</div>");
+            dungeonGame.addMessage("<div class='bold-blue'>Your Turn - Click Attack</div>");
         }
     },
 
@@ -216,7 +242,7 @@ var dungeonGame = {
             }, 3000);
         }
         else {
-            dungeonGame.addMessage("<div class='bold-red'>...You Missed!</div>");
+            dungeonGame.addMessage("<div class='bold-red'>You Missed!</div>");
             setTimeout(function(){
                 $('#messages-container').html("");
                 dungeonGame.attackMessage();
