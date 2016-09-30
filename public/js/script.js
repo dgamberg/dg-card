@@ -1,56 +1,60 @@
 var globalVars = {
     "character": [
         {
-            "name": "Blastoise",
-            "health": 190,
-            "damage": 30,
-            "skillLevel": 5,
-            "armour": 10,
-            "imageUrl": "pokemon/blastoise.jpg"
-        },
-        {
-            "name": "Charzard",
-            "health": 190,
-            "damage": 30,
-            "skillLevel": 5,
-            "armour": 10,
-            "imageUrl": "pokemon/charzard.jpg"
-        },
-        {
+            "playerName": "",
             "name": "Optimus Prime",
-            "health": 530,
-            "damage": 90,
+            "health": 120,
+            "damage": 30,
             "skillLevel": 5,
             "armour": 10,
-            "imageUrl": "transformers/optimus-prime.jpg"
+            "imageUrl": "optimus-prime.jpg"
+        },
+        {
+            "playerName": "",
+            "name": "BumbleBee",
+            "health": 100,
+            "damage": 30,
+            "skillLevel": 5,
+            "armour": 10,
+            "imageUrl": "bumblebee.jpg"
+        },
+        {
+            "playerName": "",
+            "name": "Iron Hide",
+            "health": 100,
+            "damage": 30,
+            "skillLevel": 5,
+            "armour": 10,
+            "imageUrl": "ironhide.jpg"
+        },
+        {
+            "playerName": "",
+            "name": "Ratchet",
+            "health": 100,
+            "damage": 30,
+            "skillLevel": 5,
+            "armour": 10,
+            "imageUrl": "ratchet.jpg"
         }
 
+
     ],
-    "transformerList": [
-        { "name": "Orc",  "damage": 10,"imageUrl": "orc.png", "skillLevel": 3, "armour": 3 },
-        { "name": "Goblin", "damage": 12, "imageUrl": "goblin.jpg", "skillLevel": 4, "armour": 5  },
-        { "name": "Troll",  "damage": 16, "imageUrl": "troll.jpg", "skillLevel": 5, "armour": 3  },
-        { "name": "Unicron",  "damage": 20, "imageUrl": "blood-angel.jpg", "skillLevel": 9, "armour": 5  },
-        { "name": "Tarantulas",  "damage": 12, "imageUrl": "bugbear.jpg", "skillLevel": 4, "armour": 3  },
-        { "name": "Star Scream",  "damage": 4, "imageUrl": "carrion-crawler.jpg", "skillLevel": 3, "armour": 3  },
-        { "name": "Megatron",  "damage": 4, "imageUrl": "death-dog.jpg", "skillLevel": 3, "armour": 4  },
-        { "name": "Devastator",  "damage": 7, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 6  },
-        { "name": "Barricade",  "damage": 4, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 7  }
+    "monsterList": [
+        { "name": "Megatron",  "damage": 20,"imageUrl": "megatron.jpg", "skillLevel": 8, "armour": 10 },
+        { "name": "Bonecrusher", "damage": 14, "imageUrl": "bonecrusher.jpg", "skillLevel": 4, "armour": 5  },
+        { "name": "Blackout",  "damage": 16, "imageUrl": "blackout.jpg", "skillLevel": 5, "armour": 3  },
+        { "name": "Unicron",  "damage": 15, "imageUrl": "unicron.jpg", "skillLevel": 9, "armour": 5  },
+        { "name": "Tarantulas",  "damage": 14, "imageUrl": "tarantulas.gif", "skillLevel": 4, "armour": 3  },
+        { "name": "Star Scream", "damage": 18, "imageUrl": "starscream.jpg", "skillLevel": 7, "armour": 8  },
+        { "name": "Soundwave",  "damage": 14, "imageUrl": "soundwave.jpg", "skillLevel": 3, "armour": 4  },
+        { "name": "Devastator",  "damage": 16, "imageUrl": "devastator.jpg", "skillLevel": 4, "armour": 6  },
+        { "name": "Barricade",  "damage": 15, "imageUrl": "barricade.jpg", "skillLevel": 4, "armour": 7  }
     ],
 
-    "monsterList": [
-        { "name": "Orc",  "damage": 10,"imageUrl": "orc.png", "skillLevel": 3, "armour": 3 },
-        { "name": "Goblin", "damage": 12, "imageUrl": "goblin.jpg", "skillLevel": 4, "armour": 5  },
-        { "name": "Troll",  "damage": 16, "imageUrl": "troll.jpg", "skillLevel": 5, "armour": 3  },
-        { "name": "Blood Angel",  "damage": 20, "imageUrl": "blood-angel.jpg", "skillLevel": 9, "armour": 5  },
-        { "name": "Bugbear",  "damage": 12, "imageUrl": "bugbear.jpg", "skillLevel": 4, "armour": 3  },
-        { "name": "Carrion Crawler",  "damage": 4, "imageUrl": "carrion-crawler.jpg", "skillLevel": 3, "armour": 3  },
-        { "name": "Two Headed Dog",  "damage": 4, "imageUrl": "death-dog.jpg", "skillLevel": 3, "armour": 4  },
-        { "name": "Deviant Ant",  "damage": 7, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 6  },
-        { "name": "Displacer Beast",  "damage": 4, "imageUrl": "deviant-ant.jpg", "skillLevel": 4, "armour": 7  }
-    ],
+
     "currentMonster": {},
     "monstersKilled": [],
+    "currentCharacter":{}
 };
 
 var dungeonGame = {
@@ -58,7 +62,8 @@ var dungeonGame = {
         console.log("Game Initialized");
 
         //Load Hero
-        dungeonGame.renderCharacterCard(globalVars.character[2]);
+        dungeonGame.setCurrentCharacter(0);
+        dungeonGame.renderCharacterCard(dungeonGame.getCurrentCharacter());
 
         // Get First Monster
         dungeonGame.getRandomMonster();
@@ -69,11 +74,7 @@ var dungeonGame = {
             dungeonGame.characterAttack();
 
         });
-        $('.monster-card-output').on('click', '.monster-attack-button', function(){
-            $('#messages-container').html("");
-            dungeonGame.monsterAttack();
 
-        });
         $('.continue-button').on('click', function(){
            dungeonGame.finishRound();
         });
@@ -118,12 +119,18 @@ var dungeonGame = {
     },
 
     setCharacterHealth: function(health){
-        globalVars.character.health = health;
+        globalVars.currentCharacter.health = health;
     },
     getCharacterHealth: function(){
-        return globalVars.character.health;
+        return globalVars.currentCharacter.health;
     },
-
+    getCurrentCharacter: function(){
+      return globalVars.currentCharacter;
+    },
+    setCurrentCharacter: function(num){
+        var char = globalVars.character[num];
+        globalVars.currentCharacter = char;
+    },
     setCurrentMonster: function(monster){
         globalVars.currentMonster = monster;
 
@@ -162,7 +169,7 @@ var dungeonGame = {
         output += "<div class='monster-card-container'><div class='monster-card-name-container'><div class='monster-card-name-value'>" + card.name + "</div></div>";
         output += "<div class='monster-card-stat-container'><div class='monster-card-stat-label'>Health:</div><div class='monster-card-health-value'>" + card.health + "</div></div>";
         output += "<div class='monster-card-stat-container'><div class='monster-card-stat-label'>Damage:</div><div class='monster-card-damage-value'>" + card.damage + "</div></div>";
-        output += "<div class='monster-card-image-container'><img class='monster-card-image' src='img/" + card.imageUrl + "'/></div></div>";
+        output += "<div class='monster-card-image-container'><img class='monster-card-image' src='img/transformers/" + card.imageUrl + "'/></div></div>";
         var $monsterCard = $('.monster-card-output');
         $monsterCard.append("<div class='outer-card-container'></div>");
         var $el = $monsterCard.children().last();
@@ -174,7 +181,7 @@ var dungeonGame = {
         output += "<div class='card-container'><div class='card-name-container'><div class='card-name-value'>" + cardObject.name + "</div></div>";
         output += "<div class='card-stat-container'><div class='card-stat-label'>Health:</div><div class='card-health-value'>" + cardObject.health + "</div></div>";
         output += "<div class='card-stat-container'><div class='card-stat-label'>Damage:</div><div class='card-damage-value'>" + cardObject.damage + "</div></div>";
-        output += "<div class='card-image-container'><img class='card-image' src='img/" + cardObject.imageUrl + "'/></div>";
+        output += "<div class='card-image-container'><img class='card-image' src='img/transformers/" + cardObject.imageUrl + "'/></div>";
         output += "<div class='character-attack-button-container'> <button class='character-attack-button'>ATTACK</button></div></div>"
         $('.hero-card-output').append("<div class='outer-card-container'></div>");
         var $el = $('.hero-card-output').children().last();
@@ -226,7 +233,7 @@ var dungeonGame = {
     },
 
     characterAttack: function(){
-        var heroSkill = globalVars.character.skillLevel;
+        var heroSkill = globalVars.currentCharacter.skillLevel;
         var monster = this.getCurrentMonster();
         var heroMultiplier = 10 * heroSkill;
         var range = 100;
@@ -272,7 +279,7 @@ var dungeonGame = {
     },
 
     damageMonster: function(){
-        var damage = globalVars.character.damage;
+        var damage = globalVars.currentCharacter.damage;
         var health = dungeonGame.getMonsterHealth();
         var newHealth = health - damage;
         dungeonGame.setMonsterHealth(newHealth);

@@ -2,7 +2,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     background-color: #f3f3f3;
-    background-image: url(http://designreflect.com/wp-content/uploads/2012/09/wooden-textures/tree-bark-textures-vol-1.jpg);
+    background-image: url(../img/transformers/steel-background.jpg);
 
 }
 main{
@@ -13,32 +13,6 @@ main{
     color: #000;
 }
 
-.card-container{
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: #ccc;
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 6px #666;
-    background-image: url(http://www.myfreetextures.com/wp-content/uploads/2014/11/old-brown-paper-texture-image-502x413.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.monster-card-container{
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: #ccc;
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 6px #666;
-    background-image: url(http://www.myfreetextures.com/wp-content/uploads/2014/11/old-brown-paper-texture-image-502x413.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
 .card-stat-label{
     font-weight: bold;
@@ -59,12 +33,14 @@ main{
      height: 300px;
      border-radius: 10px;
      margin-top: 25px;
+    box-shadow: 2px 2px 4px #555;
  }
 .monster-card-image{
     width: 300px;
     height: 300px;
     border-radius: 10px;
     margin-top: 25px;
+    box-shadow: 2px 2px 4px #555;
 }
 .get-monster-button{
     margin: 50px auto 15px auto;
@@ -184,11 +160,13 @@ main{
     margin-left: 20px;
 }
 .character-attack-button{
-    background-color: #cc1120;
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     text-align: left;
+    background-image: url(../img/transformers/steel-cage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .monster-attack-button{
     background-color: #cc1120;
@@ -211,6 +189,37 @@ main{
 .continue-button-hide{
     display: none;
 }
+
+.character-attack-button-container {
+    margin-top: 10px;
+}
+.card-container{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #ccc;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px #666;
+    background-image: url(../img/transformers/vertical-steel.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.monster-card-container{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #ccc;
+    padding: 25px;
+    border-radius: 5px;
+    background-image: url(../img/transformers/vertical-steel.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 456px;
+    box-shadow: 3px 3px 6px #666;
+}
 #messages-container {
     background-color: #ccc;
     padding: 25px 10px;
@@ -220,11 +229,7 @@ main{
     border-radius: 10px;
     box-shadow: 3px 3px 6px #666;
     max-width: 200px;
-    background-image: url(http://www.myfreetextures.com/wp-content/uploads/2014/11/old-brown-paper-texture-image-502x413.jpg);
+    background-image: url(../img/transformers/vertical-steel.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
-}
-.character-attack-button-container {
-    margin-top: 10px;
 }
