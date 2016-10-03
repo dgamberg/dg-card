@@ -72,7 +72,7 @@ var dungeonGame = {
         $('.character-attack-button-container').on('click', '.character-attack-button', function(){
             $('#messages-container').html("");
             dungeonGame.characterAttack();
-
+            $('.character-attack-button').addClass('hidden');
         });
 
         $('.continue-button').on('click', function(){
@@ -93,8 +93,6 @@ var dungeonGame = {
     finishRound: function(){
         $('.monster-card-output').html("");
         $('#messages-container').html("");
-        $('.attack-button-container').css('display', 'block');
-        $('.continue-button-container').css('display', 'none');
 
         dungeonGame.getRandomMonster();
         // first monster
@@ -182,7 +180,9 @@ var dungeonGame = {
         output += "<div class='card-stat-container'><div class='card-stat-label'>Health:</div><div class='card-health-value'>" + cardObject.health + "</div></div>";
         output += "<div class='card-stat-container'><div class='card-stat-label'>Damage:</div><div class='card-damage-value'>" + cardObject.damage + "</div></div>";
         output += "<div class='card-image-container'><img class='card-image' src='img/transformers/" + cardObject.imageUrl + "'/></div>";
-        output += "<div class='character-attack-button-container'> <button class='character-attack-button'>ATTACK</button></div></div>"
+        output += "<div class='buttons-container'><div class='character-attack-button-container'> <button class='character-attack-button'>ATTACK</button></div>";
+        output += "<div class='continue-button-container'><button class='continue-button'>Continue</button></div>";
+        output += "</div></div>";
         $('.hero-card-output').append("<div class='outer-card-container'></div>");
         var $el = $('.hero-card-output').children().last();
         $el.append(output);
@@ -230,6 +230,8 @@ var dungeonGame = {
             dungeonGame.addMessage("<div class='bold-green'>" + monster.name + ": MISS! </div>");
             dungeonGame.addMessage("<div class='bold-blue'>Your Turn - Click Attack</div>");
         }
+        // END OF ROUND - SHOW BUTTON
+        $('.character-attack-button').removeClass('hidden');
     },
 
     characterAttack: function(){
@@ -304,16 +306,15 @@ var dungeonGame = {
     },
 
     monsterIsDead: function(){
-
+        $('.continue-button-container').removeClass('hidden');
         var monster = this.getCurrentMonster();
         monster.isAlive = false;
         $('.monster-card-health-value').html("<span class='dead'>DEAD</span>");
         var message = "";
         message += "<div class='dead'>The " + monster.name + " is dead</div>";
         dungeonGame.addMessage(message);
-        $('.attack-button-container').css('display', 'none');
-        $('.continue-button-container').css('display', 'block');
         globalVars.monstersKilled.unshift(monster);
+
     }
 
 };
